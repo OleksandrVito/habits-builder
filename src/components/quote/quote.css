@@ -1,0 +1,33 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+
+.quote-box {
+  color: #333;
+  font-family: "Raleway", sans-serif;
+  border-radius: 3px;
+  margin: 8% auto auto auto;
+  width: 550px;
+  background-color: rgba(255, 255, 255, 0.75);
+  padding: 20px 20px;
+  box-sizing: border-box;
+  /* margin-bottom: -20px; */
+}
+blockquote {
+  height: auto;
+  clear: both;
+  font-weight: 500;
+  font-size: 1.75em;
+  box-sizing: border-box;
+  display: block;
+}
+blockquote svg {
+  padding: 0px 5px;
+  margin-bottom: -2px;
+}
+cite {
+  height: auto;
+  clear: both;
+  padding-right: 20px;
+  font-size: 1em;
+  text-align: right;
+  display: block;
+}

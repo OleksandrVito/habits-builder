@@ -1,0 +1,124 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+
+.stop-watch-section {
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  font-family: consolas;
+  user-select: none;
+}
+
+.timer {
+  position: relative;
+  width: 650px;
+  height: 150px;
+  padding-top: 20px;
+  background: rgba(255, 255, 255, 0.19);
+  z-index: 1000;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  backdrop-filter: blur(20px);
+}
+.timer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+}
+.stop-watch-section h1 {
+  display: block;
+  width: 150px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-family: "Raleway", sans-serif;
+  font-size: 2em;
+  color: #333;
+  text-align: center;
+  padding: 1px 7px 5px 15px;
+  border-radius: 5px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0, 0.29);
+  margin: 5px 80px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(237, 241, 244, 0.8);
+  background: rgba(244, 67, 54, 0.4);
+  border: 2px solid #f44336;
+}
+
+.stop-watch-section h1 span {
+  font-size: 1.45em;
+  font-family: consolas;
+}
+.timer .container h2 {
+  font-size: 6em;
+  margin: 0;
+  color: white;
+}
+.timer .container .block {
+  text-align: center;
+  padding: 5px 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.19);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0, 0.2);
+  margin: 0 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100px;
+}
+
+.timer .container span {
+  font-size: 1em;
+  color: white;
+}
+
+.set-timer {
+  font-size: 1.25em;
+  color: white;
+}
+.set-timer input {
+  font-size: 1em;
+  color: white;
+  text-align: center;
+  padding: 5px 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0, 0.2);
+  margin: 0 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.button_block {
+  width: 450px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  background: #edf1f4;
+  display: flex;
+  padding: 20px;
+}
+
+button {
+  width: 130px;
+  height: 50px;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.2em;
+  color: #666;
+  border: 2px solid #edf1f4;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+  border-radius: 10px;
+}
+
+button:active {
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  color: #f44336;
+}
