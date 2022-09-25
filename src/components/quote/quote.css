@@ -18,10 +18,13 @@ blockquote {
   font-size: 1.75em;
   box-sizing: border-box;
   display: block;
+  /* white-space: nowrap; */
 }
 blockquote svg {
+  /* white-space: nowrap; */
   padding: 0px 5px;
   margin-bottom: -2px;
+  font-size: 1.15em;
 }
 cite {
   height: auto;

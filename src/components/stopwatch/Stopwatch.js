@@ -1,29 +1,65 @@
 import { useEffect, useState, useRef } from "react";
 import "./stopwatch.css";
 
+const getCurrentTime = () => {
+  let time = {};
+  const t =
+    Date.parse(new Date()) -
+    localStorage.getItem("startPeriod") +
+    +localStorage.getItem("intermediatePeriod");
+  time.seconds = Math.floor((t / 1000) % 60);
+  time.minutes = Math.floor((t / 1000 / 60) % 60);
+  time.hours = Math.floor((t / 1000 / 60 / 60) % 24);
+  console.log(t);
+  return time;
+};
+
 const Stopwatch = () => {
-  const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [indicator, setIndicator] = useState(null);
+  const [seconds, setSeconds] = useState(() => {
+    if (localStorage.getItem("status") === "active") {
+      return getCurrentTime().seconds;
+    } else {
+      return 0;
+    }
+  });
+  const [minutes, setMinutes] = useState(() => {
+    if (localStorage.getItem("status") === "active") {
+      return getCurrentTime().minutes;
+    } else {
+      return 0;
+    }
+  });
+  const [hours, setHours] = useState(() => {
+    if (localStorage.getItem("status") === "active") {
+      return getCurrentTime().hours;
+    } else {
+      return 0;
+    }
+  });
+  const [status, setStatus] = useState(null);
   const intervalRef = useRef();
 
-  let time;
-  if (localStorage.getItem("time")) {
-    time = JSON.parse(localStorage.getItem("time"));
-  } else {
-    time = {};
-  }
-
   const startClock = () => {
-    time.start = new Date();
-    localStorage.setItem("time", JSON.stringify(time));
+    if (localStorage.getItem("status") !== "active") {
+      localStorage.setItem("startPeriod", Date.parse(new Date()));
+    }
+  };
+
+  const pauseClock = () => {
+    if (localStorage.getItem("status") === "active") {
+      localStorage.setItem("pausePeriod", Date.parse(new Date()));
+      let intermediatePeriod =
+        +localStorage.getItem("intermediatePeriod") +
+        (Date.parse(new Date()) - +localStorage.getItem("startPeriod"));
+      localStorage.setItem("intermediatePeriod", intermediatePeriod);
+    }
   };
 
   const stopClock = () => {
-    time.stop = new Date();
-    time.period = Date.parse(time.stop) - Date.parse(time.start);
-    localStorage.setItem("time", JSON.stringify(time));
+    localStorage.setItem("intermediatePeriod", 0);
+    // localStorage.setItem("stopPeriod", Date.parse(new Date()));
+    let period = { seconds: seconds, minutes: minutes, hours: hours };
+    localStorage.setItem("period", JSON.stringify(period));
   };
 
   const updateClock = () => {
@@ -41,7 +77,10 @@ const Stopwatch = () => {
   //функція для зміни часу
   useEffect(() => {
     intervalRef.current = setInterval(() => {
-      if (seconds >= 0 && indicator === "start") {
+      if (
+        (seconds >= 0 && status === "start") ||
+        localStorage.getItem("status") === "active"
+      ) {
         updateClock();
       }
     }, 1000);
@@ -51,19 +90,14 @@ const Stopwatch = () => {
     };
   }, [seconds]);
 
+  //функція запуску таймера
   const start = () => {
-    if (seconds === 0 && minutes === 0 && hours === 0) {
-      setTimeout(() => {
-        updateClock();
-      }, 1000);
-    } else if (indicator === "pause") {
-      setTimeout(() => {
-        updateClock();
-      }, 1000);
-    } else if (indicator === "stop") {
+    if (status === "stop") {
       setSeconds(0);
       setMinutes(0);
       setHours(0);
+    } else if (localStorage.getItem("status") === "inactive") {
+      updateClock();
     }
   };
 
@@ -102,7 +136,8 @@ const Stopwatch = () => {
           onClick={() => {
             start();
             startClock();
-            setIndicator("start");
+            setStatus("start");
+            localStorage.setItem("status", "active");
           }}
         >
           <span>start</span>
@@ -110,7 +145,9 @@ const Stopwatch = () => {
         <button
           onClick={() => {
             clearInterval(intervalRef.current);
-            setIndicator("pause");
+            pauseClock();
+            setStatus("pause");
+            localStorage.setItem("status", "inactive");
           }}
         >
           <span>pause</span>
@@ -118,8 +155,9 @@ const Stopwatch = () => {
         <button
           onClick={() => {
             clearInterval(intervalRef.current);
-            setIndicator("stop");
             stopClock();
+            setStatus("stop");
+            localStorage.setItem("status", "inactive");
           }}
         >
           <span>stop</span>

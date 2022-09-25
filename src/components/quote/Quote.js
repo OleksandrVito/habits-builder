@@ -2,7 +2,7 @@ import { useState } from "react";
 import getQuote from "../../service/getQuote";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
-import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
+// import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import "./quote.css";
 import { useEffect } from "react";
 
@@ -42,7 +42,7 @@ const Quote = () => {
       <blockquote>
         <FontAwesomeIcon icon={faQuoteLeft} />
         {quote}
-        <FontAwesomeIcon icon={faQuoteRight} />
+        {/* <FontAwesomeIcon icon={faQuoteRight} /> */}
       </blockquote>
       <cite>{author}</cite>
     </div>
