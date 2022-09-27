@@ -2,7 +2,7 @@
   padding: 10px 0;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  margin: 10px 0;
+  margin: 10px 45px;
   cursor: pointer;
   transition: 0.5s;
   position: relative;
@@ -11,7 +11,8 @@
   box-sizing: border-box;
 }
 
-.habits_list_block .habit:hover {
+.habits_list_block .habit:hover,
+.habits_list_block .habit:focus {
   background: #edf1f4;
   box-shadow: -15px 30px 50px rgba(0, 0, 0, 0.5);
   transform: scale(1.15) translateY(-10px);
@@ -29,7 +30,8 @@
   /* text-transform: lowercase; */
 }
 
-.habits_list_block .habit:hover h4 {
+.habits_list_block .habit:hover h4,
+.habits_list_block .habit:focus h4 {
   color: #444;
   top: 0px;
   font-size: 1.2em;
@@ -47,7 +49,8 @@
   margin: 5px;
 }
 
-.habits_list_block .habit:hover button {
+.habits_list_block .habit:hover button,
+.habits_list_block .habit:focus button {
   visibility: visible;
   cursor: pointer;
   user-select: none;
@@ -74,20 +77,24 @@
   height: 17px;
   visibility: hidden;
   color: #444;
-  /* border: 1px solid #444; */
   text-align: center;
   border-radius: 50px;
 }
 
-.habits_list_block .habit:hover span {
+.habits_list_block .habit:hover span,
+.habits_list_block .habit:focus span {
   visibility: visible;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
 }
 
 .null {
   padding: 18px 0;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  margin: 10px 0;
+  margin: 10px 45px;
   position: relative;
   cursor: default;
   height: 105px;

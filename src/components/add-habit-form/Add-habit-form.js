@@ -1,6 +1,13 @@
+import { useEffect } from "react";
 import "./add-habit-form.css";
 
 const AddHabitForm = ({ styleAddHabitForm, changeStyle, changeHabitList }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      document.getElementById("add_habit_form_input").focus();
+    }, 500);
+  }, [styleAddHabitForm]);
+
   const clearInput = () => {
     setTimeout(() => {
       document.getElementById("add_habit_form_input").value = "";
@@ -22,6 +29,7 @@ const AddHabitForm = ({ styleAddHabitForm, changeStyle, changeHabitList }) => {
       style={{
         opacity: `${styleAddHabitForm.opacity}`,
         visibility: `${styleAddHabitForm.visibility}`,
+        height: `${styleAddHabitForm.height}`,
       }}
       onClick={(e) => {
         if (e.target.classList.contains("backgroud")) {

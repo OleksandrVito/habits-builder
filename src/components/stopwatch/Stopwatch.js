@@ -14,7 +14,7 @@ const getCurrentTime = () => {
   return time;
 };
 
-const Stopwatch = () => {
+const Stopwatch = ({ currentHabit }) => {
   const [seconds, setSeconds] = useState(() => {
     if (localStorage.getItem("status") === "active") {
       return getCurrentTime().seconds;
@@ -113,7 +113,8 @@ const Stopwatch = () => {
   return (
     <section className="stop-watch-section">
       <h1>
-        TIME<span>:</span>
+        TIME for {currentHabit}
+        <span>:</span>
       </h1>
       <div className="timer">
         <div className="container">

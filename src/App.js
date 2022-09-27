@@ -14,13 +14,19 @@ function App() {
         }
   );
 
+  const [currentHabit, setCurrentHabit] = useState("Sex");
+
+  const changeCurrentHabit = (habit) => {
+    setCurrentHabit(habit);
+  };
+
   return (
     <div className="App" style={background}>
       <div>
         <Quote />
-        <Stopwatch />
+        <Stopwatch currentHabit={currentHabit} />
       </div>
-      <HabitsList />
+      <HabitsList changeCurrentHabit={changeCurrentHabit} />
       <button
         className="changeBackground_btn"
         onClick={() => {

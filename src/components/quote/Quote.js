@@ -33,7 +33,15 @@ const Quote = () => {
         setAuthor(author);
       });
 
+      if (
+        !JSON.parse(localStorage.getItem("state")) ||
+        +JSON.parse(localStorage.getItem("state")).day !== day
+      ) {
+        console.log(9999);
+      }
+
       localStorage.setItem("day", day);
+      localStorage.setItem("state", JSON.stringify({ day: day }));
     }
   }, []);
 

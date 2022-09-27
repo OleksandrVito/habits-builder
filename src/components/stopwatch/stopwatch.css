@@ -31,7 +31,7 @@
 }
 .stop-watch-section h1 {
   display: block;
-  width: 150px;
+  max-width: 550px;
   box-sizing: border-box;
   padding: 5px;
   font-family: "Raleway", sans-serif;

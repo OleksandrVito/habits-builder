@@ -4,7 +4,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./habits-list.css";
 
-const HabitsList = () => {
+const HabitsList = ({ changeCurrentHabit }) => {
   const [habitList, setHabitList] = useState(
     localStorage.getItem("habitList")
       ? localStorage.getItem("habitList").split(",")
@@ -14,6 +14,7 @@ const HabitsList = () => {
   const [styleAddHabitForm, setStyleAddHabitForm] = useState({
     opacity: 0,
     visibility: "hidden",
+    height: `100px`,
   });
 
   const onDelete = (element) => {
@@ -24,22 +25,27 @@ const HabitsList = () => {
     localStorage.setItem("habitList", list);
   };
 
+  const changeStyle = (num, property, k = 1) => {
+    setStyleAddHabitForm({
+      opacity: num,
+      visibility: property,
+      height: `${
+        document.querySelector(".habits_list_block").scrollHeight / k
+      }px`,
+    });
+  };
+
   const elements = habitList.map((element) => {
     return (
       <HabitItem
         key={uuidv4()}
         habit={element}
         onDelete={() => onDelete(element)}
+        changeCurrentHabit={changeCurrentHabit}
+        changeStyle={changeStyle}
       />
     );
   });
-
-  const changeStyle = (num, property) => {
-    setStyleAddHabitForm({
-      opacity: num,
-      visibility: property,
-    });
-  };
 
   const changeHabitList = (habitName) => {
     let list = [...habitList];
