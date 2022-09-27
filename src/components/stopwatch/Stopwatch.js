@@ -92,10 +92,23 @@ const Stopwatch = ({ currentHabit }) => {
 
   //функція запуску таймера
   const start = () => {
+    console.log(status);
+    console.log(localStorage.getItem("status"));
     if (status === "stop") {
       setSeconds(0);
       setMinutes(0);
       setHours(0);
+
+      //перевірити чи це не баг
+      if (
+        localStorage.getItem("status") === "inactive" &&
+        seconds === 0 &&
+        minutes === 0 &&
+        hours === 0
+      ) {
+        updateClock();
+      }
+      //
     } else if (localStorage.getItem("status") === "inactive") {
       updateClock();
     }
