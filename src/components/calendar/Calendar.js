@@ -10,7 +10,7 @@ const Calendar = ({ habit, style }) => {
   const dayItem = [];
 
   if (getLocalStorageHistory("t", habit)) {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < getLocalStorageHistory("t", habit).length; i++) {
       dayItem.push(
         <CalendarDayItem
           key={uuidv4()}
