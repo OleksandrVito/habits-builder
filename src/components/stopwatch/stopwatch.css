@@ -22,6 +22,7 @@
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.19);
   backdrop-filter: blur(20px);
+  transition: 2s -webkit-filter linear;
 }
 .timer .container {
   display: flex;
