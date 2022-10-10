@@ -52,3 +52,14 @@
 .calendar-section .calendar_day_item:hover {
   color: white;
 }
+
+@media screen and (max-width: 767px) {
+  .calendar-section .calendar_day_item {
+    width: 55px;
+    height: 55px;
+    font-size: 0.9em;
+  }
+  .calendar-section .calendar_day_item:hover {
+    transform: scale(1.4);
+  }
+}

@@ -1,5 +1,6 @@
 .calendar-section {
-  margin: 80px auto auto auto;
+  margin: 0 auto;
+  margin-top: 80px;
   position: relative;
 }
 
@@ -35,7 +36,7 @@
   color: #444;
   font-size: 2em;
   width: 650px;
-  height: 500px;
+  /* height: 500px; */
   /* z-index: 1000; */
   border-radius: 10px;
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
@@ -55,6 +56,7 @@
 
 .calendar-section .message {
   display: block;
+  width: 100%;
   font-family: consolas;
   font-family: "Raleway", sans-serif;
   color: rgb(150, 95, 95);
@@ -62,7 +64,7 @@
   font-weight: 500;
   position: absolute;
   top: 120px;
-  left: 50%;
+  left: 70%;
   transform: translateX(-50%);
   z-index: 2;
   /* transform: translateX(-10%) translateY(150%); */
@@ -73,15 +75,30 @@
 
 @media screen and (max-width: 767px) {
   .calendar-section {
-    width: 100%;
+    width: 98%;
+    padding-left: 5px;
+    padding-right: 5px;
+    left: 0;
+    position: absolute;
+    right: 50%;
     /* margin: 0 auto; */
+    /* margin-right: 50%; */
   }
   .calendar_container {
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    /* margin-left: 17%; */
+    /* margin: 0 auto; */
+    padding: 20px;
+    padding-right: 40px;
+    padding-bottom: 30px;
+    /* padding: 100px; */
+    padding-top: 65px;
+    grid-template-columns: 45px 45px 45px 45px 45px 45px;
+    /* grid-template-rows: 45px 45px 45px 45px 45px; */
+    /* gap: 10px; */
   }
   .calendar_title {
-    width: 70%;
-    margin-left: 15%;
+    width: 80%;
+    /* margin-left: 15%; */
   }
 }

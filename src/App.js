@@ -57,15 +57,15 @@ function App() {
     if (viewElem.transform === "translateY(0)") {
       setViewElem({
         transform: "translateY(-250%)",
+        opacity: 0,
         transition: "all 0.8s",
       });
     } else {
-      setTimeout(() => {
-        setViewElem({
-          transform: "translateY(0)",
-          transition: "all 0.8s",
-        });
-      }, 0);
+      setViewElem({
+        transform: "translateY(0)",
+        opacity: 1,
+        transition: "transform 0.8s",
+      });
     }
   };
 

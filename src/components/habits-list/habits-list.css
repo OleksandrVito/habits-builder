@@ -77,12 +77,18 @@
 
 @media screen and (max-width: 1024px) {
   .habits_list_container {
-    width: 90%;
+    width: 85%;
     position: absolute;
     top: 0;
-    left: 5%;
+    left: 7%;
+    /* padding: 0; */
   }
-
+  .habits_list_block {
+    width: 100%;
+    min-width: 300px;
+    /* position: absolute; */
+    /* left: -5%; */
+  }
   .habits_list_title {
     width: 90%;
     position: absolute;
