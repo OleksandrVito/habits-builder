@@ -4,7 +4,12 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./habits-list.css";
 
-const HabitsList = ({ changeCurrentHabit }) => {
+const HabitsList = ({
+  changeCurrentHabit,
+  changeView,
+  style,
+  changeViewBlock,
+}) => {
   const [habitList, setHabitList] = useState(
     localStorage.getItem("habitList")
       ? localStorage.getItem("habitList").split(",")
@@ -42,10 +47,20 @@ const HabitsList = ({ changeCurrentHabit }) => {
         habit={element}
         onDelete={() => onDelete(element)}
         changeCurrentHabit={changeCurrentHabit}
+        changeView={changeView}
         changeStyle={changeStyle}
+        changeViewBlock={changeViewBlock}
       />
     );
   });
+
+  const setLocalStorageState = (property, value) => {
+    const day = new Date().getDate();
+    const copy = { ...JSON.parse(localStorage.getItem("state")) };
+    copy[day][property] = value;
+    const newState = { ...JSON.parse(localStorage.getItem("state")), ...copy };
+    localStorage.setItem("state", JSON.stringify(newState));
+  };
 
   const changeHabitList = (habitName) => {
     let list = [...habitList];
@@ -53,11 +68,12 @@ const HabitsList = ({ changeCurrentHabit }) => {
       list.push(habitName);
       setHabitList(list);
       localStorage.setItem("habitList", list);
+      setLocalStorageState(habitName, { status: "inactive" });
     }
   };
 
   return (
-    <div className="habits_list_container">
+    <div className="habits_list_container" style={style}>
       <h3 className="habits_list_title">Your habits list</h3>
       <div className="habits_list_block">
         {elements.length > 0 ? elements : <HabitItem habit={null} />}

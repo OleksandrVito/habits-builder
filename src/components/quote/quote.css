@@ -4,7 +4,7 @@
   color: #333;
   font-family: "Raleway", sans-serif;
   border-radius: 3px;
-  margin: 8% auto auto auto;
+  margin: 80px auto auto auto;
   width: 550px;
   background-color: rgba(255, 255, 255, 0.75);
   padding: 20px 20px;
@@ -33,4 +33,13 @@ cite {
   font-size: 1em;
   text-align: right;
   display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .quote-box {
+    width: 90%;
+  }
+  blockquote {
+    font-size: 1.5em;
+  }
 }

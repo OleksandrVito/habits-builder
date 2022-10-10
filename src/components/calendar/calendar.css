@@ -1,0 +1,87 @@
+.calendar-section {
+  margin: 80px auto auto auto;
+  position: relative;
+}
+
+.calendar_title {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.8em;
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  width: 550px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #555;
+  border-radius: 5px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0, 0.29);
+  margin: 5px 80px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(237, 241, 244, 0.3);
+  /* border: 2px solid rgba(237, 241, 244, 1); */
+  margin: auto;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.calendar_container {
+  position: relative;
+  justify-content: space-evenly;
+  align-items: center;
+  font-family: consolas;
+  color: #444;
+  font-size: 2em;
+  width: 650px;
+  height: 500px;
+  /* z-index: 1000; */
+  border-radius: 10px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(237, 241, 244, 0.5);
+  backdrop-filter: blur(20px);
+  padding: 100px;
+  padding-top: 65px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 65px 65px 65px 65px 65px 65px;
+  grid-template-rows: 65px 65px 65px 65px 65px;
+  gap: 15px;
+}
+
+.calendar-section .message {
+  display: block;
+  font-family: consolas;
+  font-family: "Raleway", sans-serif;
+  color: rgb(150, 95, 95);
+  font-size: 1.3em;
+  font-weight: 500;
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  /* transform: translateX(-10%) translateY(150%); */
+  /* border: 1px solid red; */
+  /* margin: 15px; */
+  /* padding: 15px; */
+}
+
+@media screen and (max-width: 767px) {
+  .calendar-section {
+    width: 100%;
+    /* margin: 0 auto; */
+  }
+  .calendar_container {
+    width: 80%;
+    margin-left: 10%;
+  }
+  .calendar_title {
+    width: 70%;
+    margin-left: 15%;
+  }
+}

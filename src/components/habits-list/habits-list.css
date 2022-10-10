@@ -54,6 +54,7 @@
   border-radius: 50px;
   margin-left: 190px;
   margin-right: 190px;
+  margin: 0 auto;
   cursor: pointer;
   position: relative;
   width: 50px;
@@ -72,4 +73,20 @@
   box-shadow: inset 3px 3px 12px rgba(0, 0, 0, 0.2),
     inset -2px -2px 15px rgba(255, 255, 255, 0.15);
   color: #f44336;
+}
+
+@media screen and (max-width: 1024px) {
+  .habits_list_container {
+    width: 90%;
+    position: absolute;
+    top: 0;
+    left: 5%;
+  }
+
+  .habits_list_title {
+    width: 90%;
+    position: absolute;
+    top: -65px;
+    left: 5%;
+  }
 }

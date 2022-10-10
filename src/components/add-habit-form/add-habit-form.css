@@ -66,3 +66,16 @@
 .add_habit_form span:active {
   background: rgba(0, 0, 0, 0.1);
 }
+
+@media screen and (max-width: 1024px) {
+  .add_habit_form {
+    max-width: 75%;
+    width: 75%;
+    margin: 0 auto;
+    margin-left: 2%;
+  }
+
+  .add_habit_form input {
+    width: 100%;
+  }
+}

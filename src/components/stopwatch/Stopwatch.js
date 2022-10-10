@@ -1,65 +1,192 @@
 import { useEffect, useState, useRef } from "react";
+import { setLocalStorageState } from "../../service/changeStorage";
+import { getLocalStorageState } from "../../service/changeStorage";
 import "./stopwatch.css";
 
-const getCurrentTime = () => {
+const getCurrentTime = (currentHabit) => {
   let time = {};
-  const t =
-    Date.parse(new Date()) -
-    localStorage.getItem("startPeriod") +
-    +localStorage.getItem("intermediatePeriod");
+  let t;
+  if (getLocalStorageState("status", currentHabit) === "active") {
+    t =
+      Date.parse(new Date()) -
+      getLocalStorageState("startPeriod", currentHabit);
+  }
+  if (
+    getLocalStorageState("intermediatePeriod", currentHabit) &&
+    getLocalStorageState("intermediatePeriod", currentHabit) > 0 &&
+    getLocalStorageState("status", currentHabit) !== "active"
+  ) {
+    t = getLocalStorageState("intermediatePeriod", currentHabit);
+  }
+  if (
+    getLocalStorageState("intermediatePeriod", currentHabit) &&
+    getLocalStorageState("intermediatePeriod", currentHabit) > 0 &&
+    getLocalStorageState("status", currentHabit) === "active"
+  ) {
+    t =
+      Date.parse(new Date()) -
+      getLocalStorageState("startPeriod", currentHabit) +
+      +getLocalStorageState("intermediatePeriod", currentHabit);
+  }
+
   time.seconds = Math.floor((t / 1000) % 60);
   time.minutes = Math.floor((t / 1000 / 60) % 60);
   time.hours = Math.floor((t / 1000 / 60 / 60) % 24);
-  console.log(t);
   return time;
 };
 
-const Stopwatch = ({ currentHabit }) => {
+const Stopwatch = ({ currentHabit, style }) => {
   const [seconds, setSeconds] = useState(() => {
-    if (localStorage.getItem("status") === "active") {
-      return getCurrentTime().seconds;
+    if (getLocalStorageState("status", currentHabit) === "active") {
+      return getCurrentTime(currentHabit).seconds;
     } else {
-      return 0;
+      if (getLocalStorageState("intermediatePeriod", currentHabit) !== 0) {
+        return getCurrentTime(currentHabit).seconds;
+      } else {
+        return 0;
+      }
     }
   });
   const [minutes, setMinutes] = useState(() => {
-    if (localStorage.getItem("status") === "active") {
-      return getCurrentTime().minutes;
+    if (getLocalStorageState("status", currentHabit) === "active") {
+      return getCurrentTime(currentHabit).minutes;
     } else {
-      return 0;
+      if (getLocalStorageState("intermediatePeriod", currentHabit) !== 0) {
+        return getCurrentTime(currentHabit).minutes;
+      } else {
+        return 0;
+      }
     }
   });
   const [hours, setHours] = useState(() => {
-    if (localStorage.getItem("status") === "active") {
-      return getCurrentTime().hours;
+    if (getLocalStorageState("status", currentHabit) === "active") {
+      return getCurrentTime(currentHabit).hours;
     } else {
-      return 0;
+      if (getLocalStorageState("intermediatePeriod", currentHabit) !== 0) {
+        return getCurrentTime(currentHabit).hours;
+      } else {
+        return 0;
+      }
     }
   });
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState();
   const intervalRef = useRef();
+  const [backgroundTimer, setBackgroundTimer] = useState({ display: "none" });
+
+  //рендеримо новий таймер при зміні звички
+  useEffect(() => {
+    setSeconds(() => {
+      if (getLocalStorageState("status", currentHabit) === "active") {
+        return getCurrentTime(currentHabit).seconds;
+      } else {
+        if (
+          getLocalStorageState("intermediatePeriod", currentHabit) &&
+          getLocalStorageState("intermediatePeriod", currentHabit) !== 0
+        ) {
+          return getCurrentTime(currentHabit).seconds;
+        } else {
+          return 0;
+        }
+      }
+    });
+
+    setMinutes(() => {
+      if (getLocalStorageState("status", currentHabit) === "active") {
+        return getCurrentTime(currentHabit).minutes;
+      } else {
+        if (
+          getLocalStorageState("intermediatePeriod", currentHabit) &&
+          getLocalStorageState("intermediatePeriod", currentHabit) !== 0
+        ) {
+          return getCurrentTime(currentHabit).minutes;
+        } else {
+          return 0;
+        }
+      }
+    });
+    setHours(() => {
+      if (getLocalStorageState("status", currentHabit) === "active") {
+        return getCurrentTime(currentHabit).hours;
+      } else {
+        if (
+          getLocalStorageState("intermediatePeriod", currentHabit) &&
+          getLocalStorageState("intermediatePeriod", currentHabit) !== 0
+        ) {
+          return getCurrentTime(currentHabit).hours;
+        } else {
+          return 0;
+        }
+      }
+    });
+
+    if (currentHabit === "") {
+      setBackgroundTimer({ display: "block" });
+    } else {
+      setBackgroundTimer({ display: "none" });
+    }
+  }, [currentHabit]);
 
   const startClock = () => {
-    if (localStorage.getItem("status") !== "active") {
-      localStorage.setItem("startPeriod", Date.parse(new Date()));
+    if (
+      getLocalStorageState("status", currentHabit) !== "active" &&
+      getLocalStorageState("intermediatePeriod", currentHabit) === 0
+    ) {
+      setLocalStorageState("startPeriod", Date.parse(new Date()), currentHabit);
+      if (seconds > 0 || minutes > 0 || hours > 0) {
+        setSeconds(0);
+        setMinutes(0);
+        setHours(0);
+      }
+    } else if (
+      getLocalStorageState("status", currentHabit) !== "active" &&
+      // status === `pause${currentHabit}`
+      getLocalStorageState("intermediatePeriod", currentHabit) !== 0
+    ) {
+      setLocalStorageState("startPeriod", Date.parse(new Date()), currentHabit);
+      updateClock();
+    } else if (
+      getLocalStorageState("status", currentHabit) !== "active" &&
+      !getLocalStorageState("intermediatePeriod", currentHabit)
+    ) {
+      setLocalStorageState("startPeriod", Date.parse(new Date()), currentHabit);
+      updateClock();
     }
   };
 
   const pauseClock = () => {
-    if (localStorage.getItem("status") === "active") {
-      localStorage.setItem("pausePeriod", Date.parse(new Date()));
-      let intermediatePeriod =
-        +localStorage.getItem("intermediatePeriod") +
-        (Date.parse(new Date()) - +localStorage.getItem("startPeriod"));
-      localStorage.setItem("intermediatePeriod", intermediatePeriod);
+    if (getLocalStorageState("status", currentHabit) === "active") {
+      // setLocalStorageState("pauseMoment", Date.parse(new Date()), currentHabit);
+      let intermediatePeriod;
+      if (!getLocalStorageState("intermediatePeriod", currentHabit)) {
+        intermediatePeriod =
+          Date.parse(new Date()) -
+          +getLocalStorageState("startPeriod", currentHabit);
+      } else {
+        intermediatePeriod =
+          +getLocalStorageState("intermediatePeriod", currentHabit) +
+          Date.parse(new Date()) -
+          +getLocalStorageState("startPeriod", currentHabit);
+      }
+      setLocalStorageState(
+        "intermediatePeriod",
+        intermediatePeriod,
+        currentHabit
+      );
     }
   };
 
   const stopClock = () => {
-    localStorage.setItem("intermediatePeriod", 0);
-    // localStorage.setItem("stopPeriod", Date.parse(new Date()));
+    setLocalStorageState("intermediatePeriod", 0, currentHabit);
     let period = { seconds: seconds, minutes: minutes, hours: hours };
-    localStorage.setItem("period", JSON.stringify(period));
+    let t =
+      hours * 60 * 60 +
+      minutes * 60 +
+      seconds +
+      (+getLocalStorageState("t", currentHabit)
+        ? getLocalStorageState("t", currentHabit)
+        : 0);
+    setLocalStorageState("period", JSON.stringify(period), currentHabit);
+    setLocalStorageState("t", t, currentHabit);
   };
 
   const updateClock = () => {
@@ -72,14 +199,17 @@ const Stopwatch = ({ currentHabit }) => {
       setMinutes(0);
       setHours(hours + 1);
     }
+    if (hours === 23) {
+      setHours(0);
+    }
   };
 
   //функція для зміни часу
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       if (
-        (seconds >= 0 && status === "start") ||
-        localStorage.getItem("status") === "active"
+        (seconds > 0 && status === `start${currentHabit}`) ||
+        getLocalStorageState("status", currentHabit) === "active"
       ) {
         updateClock();
       }
@@ -92,16 +222,13 @@ const Stopwatch = ({ currentHabit }) => {
 
   //функція запуску таймера
   const start = () => {
-    console.log(status);
-    console.log(localStorage.getItem("status"));
-    if (status === "stop") {
+    if (status === `stop${currentHabit}`) {
+      setLocalStorageState("intermediatePeriod", 0, currentHabit);
       setSeconds(0);
       setMinutes(0);
       setHours(0);
-
-      //перевірити чи це не баг
       if (
-        localStorage.getItem("status") === "inactive" &&
+        getLocalStorageState("status", currentHabit) === "inactive" &&
         seconds === 0 &&
         minutes === 0 &&
         hours === 0
@@ -109,8 +236,6 @@ const Stopwatch = ({ currentHabit }) => {
         updateClock();
       }
       //
-    } else if (localStorage.getItem("status") === "inactive") {
-      updateClock();
     }
   };
 
@@ -124,12 +249,13 @@ const Stopwatch = ({ currentHabit }) => {
   };
 
   return (
-    <section className="stop-watch-section">
+    <section className="stop-watch-section" style={style}>
       <h1>
-        TIME for {currentHabit}
-        <span>:</span>
+        {currentHabit ? `TIME for ${currentHabit}` : `Choose your habit`}
+        <span>{currentHabit ? ":" : "!"}</span>
       </h1>
       <div className="timer">
+        <div className="backgroundContainer" style={backgroundTimer}></div>
         <div className="container">
           <div className="block">
             <h2 id="hours">{getZero(hours)}</h2>
@@ -147,31 +273,39 @@ const Stopwatch = ({ currentHabit }) => {
       </div>
       <div className="button_block">
         <button
+          disabled={currentHabit ? false : true}
           onClick={() => {
             start();
             startClock();
-            setStatus("start");
-            localStorage.setItem("status", "active");
+            setStatus(`start${currentHabit}`);
+            setLocalStorageState("status", "active", currentHabit);
           }}
         >
           <span>start</span>
         </button>
         <button
+          disabled={currentHabit ? false : true}
           onClick={() => {
             clearInterval(intervalRef.current);
             pauseClock();
-            setStatus("pause");
-            localStorage.setItem("status", "inactive");
+            setStatus(`pause${currentHabit}`);
+            setLocalStorageState("status", "inactive", currentHabit);
           }}
         >
           <span>pause</span>
         </button>
         <button
+          disabled={currentHabit ? false : true}
           onClick={() => {
             clearInterval(intervalRef.current);
             stopClock();
-            setStatus("stop");
-            localStorage.setItem("status", "inactive");
+            setStatus(`stop${currentHabit}`);
+            setLocalStorageState("status", "inactive", currentHabit);
+            // setLocalStorageState(
+            //   "startPeriod",
+            //   Date.parse(new Date()),
+            //   currentHabit
+            // );
           }}
         >
           <span>stop</span>

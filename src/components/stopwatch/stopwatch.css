@@ -29,6 +29,18 @@
   align-items: center;
   height: 75%;
 }
+
+.timer .backgroundContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  border-radius: 20px;
+  width: 650px;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.01);
+}
 .stop-watch-section h1 {
   display: block;
   max-width: 550px;
@@ -43,15 +55,18 @@
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0, 0.29);
   margin: 5px 80px;
   margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(237, 241, 244, 0.5);
-  border: 2px solid rgba(237, 241, 244, 1);
+  /* border: 2px solid rgba(237, 241, 244, 1); */
 }
 
 .stop-watch-section h1 span {
-  font-size: 1.45em;
+  font-size: 1.25em;
   font-family: consolas;
+  margin-right: 0;
+  padding-right: 0;
 }
 .timer .container h2 {
   font-size: 6em;
@@ -120,4 +135,19 @@
 .stop-watch-section button:active {
   box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
   color: #f44336;
+}
+
+.stop-watch-section button:disabled {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+  color: #666;
+}
+
+@media screen and (max-width: 767px) {
+  stop-watch-section {
+    width: 100%;
+  }
+  .timer,
+  .timer .backgroundContainer {
+    width: 90%;
+  }
 }

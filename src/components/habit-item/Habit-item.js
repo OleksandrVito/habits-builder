@@ -1,14 +1,33 @@
 import "./habit-item.css";
 
-const HabitItem = ({ habit, onDelete, changeCurrentHabit, changeStyle }) => {
+const HabitItem = ({
+  habit,
+  onDelete,
+  changeCurrentHabit,
+  changeStyle,
+  changeView,
+  changeViewBlock,
+}) => {
   let classBlockName = "habit";
   if (habit == null) {
     classBlockName = "null";
   }
 
   const openStopWatch = () => {
-    changeCurrentHabit(habit);
-    console.log(habit);
+    changeCurrentHabit(habit, true);
+    changeView("Stopwatch");
+    changeViewBlock({
+      transform: "translateX(-120%)",
+      transition: "all 0.8s",
+    });
+  };
+
+  const openCalender = () => {
+    changeView(habit);
+    changeViewBlock({
+      transform: "translateX(-120%)",
+      transition: "all 0.8s",
+    });
   };
 
   return (
@@ -19,13 +38,15 @@ const HabitItem = ({ habit, onDelete, changeCurrentHabit, changeStyle }) => {
         onClick={() => {
           onDelete(habit);
           changeStyle(0, "hidden", 2);
+          changeCurrentHabit(habit, false);
+          changeView("Stopwatch");
         }}
       >
         close
       </span>
       <div className="button_block">
         <button onClick={openStopWatch}>stopwatch</button>
-        <button>history</button>
+        <button onClick={openCalender}>history</button>
       </div>
       <div className="text">Please make it your habit!</div>
     </div>

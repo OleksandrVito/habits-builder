@@ -1,0 +1,54 @@
+.calendar-section .calendar_day_item {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: rgba(255, 255, 255, 0.9) 1px 0px 10px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0px 5px rgba(255, 255, 255, 0.7);
+  transition: transform 0.5s ease-in-out;
+  text-align: center;
+  user-select: none;
+  font-size: 1.1em;
+}
+
+.calendar-section .calendar_day_item:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.5);
+  box-shadow: 0 5px 45px rgba(0, 0, 0, 0.5);
+}
+
+.calendar-section .calendar_day_item span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 0.5em;
+  color: red;
+  opacity: 0;
+}
+.calendar-section .calendar_day_item:hover span {
+  opacity: 1;
+  z-index: 2;
+}
+
+.calendar-section .calendar_day_item p {
+  font-size: 1em;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  transition: all 0s;
+}
+
+.calendar-section .calendar_day_item:hover {
+  color: white;
+}

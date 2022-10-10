@@ -61,7 +61,7 @@ const changeBackground = () => {
 
   const randombaCkground = Math.floor(Math.random() * arrayBackground.length);
 
-  console.log(randombaCkground);
+  // console.log(randombaCkground);
   localStorage.setItem(
     "background",
     JSON.stringify(arrayBackground[randombaCkground])

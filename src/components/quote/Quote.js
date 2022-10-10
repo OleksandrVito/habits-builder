@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import getQuote from "../../service/getQuote";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 // import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import "./quote.css";
-import { useEffect } from "react";
 
 let day = new Date().getDate();
 if (!localStorage.getItem("day") || +localStorage.getItem("day") !== day) {
@@ -12,7 +12,7 @@ if (!localStorage.getItem("day") || +localStorage.getItem("day") !== day) {
   localStorage.setItem("author", "");
 }
 
-const Quote = () => {
+const Quote = ({ style }) => {
   // const [day, setDay] = useState(localStorage.getItem("day"));
   const [quote, setQuote] = useState(localStorage.getItem("quote"));
   const [author, setAuthor] = useState(localStorage.getItem("author"));
@@ -32,21 +32,26 @@ const Quote = () => {
         setQuote(quote);
         setAuthor(author);
       });
-
-      if (
-        !JSON.parse(localStorage.getItem("state")) ||
-        +JSON.parse(localStorage.getItem("state")).day !== day
-      ) {
-        console.log(9999);
-      }
-
       localStorage.setItem("day", day);
-      localStorage.setItem("state", JSON.stringify({ day: day }));
+      const state = {};
+      state[day] = {};
+
+      if (!localStorage.getItem("state")) {
+        localStorage.setItem("state", JSON.stringify(state));
+      } else {
+        localStorage.setItem(
+          "state",
+          JSON.stringify({
+            ...JSON.parse(localStorage.getItem("state")),
+            ...state,
+          })
+        );
+      }
     }
   }, []);
 
   return (
-    <div className="quote-box">
+    <div className="quote-box" style={style}>
       <blockquote>
         <FontAwesomeIcon icon={faQuoteLeft} />
         {quote}
