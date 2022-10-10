@@ -65,7 +65,7 @@
   position: absolute;
   top: 120px;
   left: 70%;
-  transform: translateX(-50%);
+  transform: translateX(-40%);
   z-index: 2;
   /* transform: translateX(-10%) translateY(150%); */
   /* border: 1px solid red; */
@@ -78,27 +78,19 @@
     width: 98%;
     padding-left: 5px;
     padding-right: 5px;
-    left: 0;
+    /* left: 0; */
     position: absolute;
-    right: 50%;
-    /* margin: 0 auto; */
-    /* margin-right: 50%; */
+    right: 0;
   }
   .calendar_container {
     width: 100%;
-    /* margin-left: 17%; */
-    /* margin: 0 auto; */
     padding: 20px;
-    padding-right: 40px;
+    /* padding-right: 40px; */
     padding-bottom: 30px;
-    /* padding: 100px; */
     padding-top: 65px;
     grid-template-columns: 45px 45px 45px 45px 45px 45px;
-    /* grid-template-rows: 45px 45px 45px 45px 45px; */
-    /* gap: 10px; */
   }
   .calendar_title {
     width: 80%;
-    /* margin-left: 15%; */
   }
 }

@@ -17,7 +17,7 @@ const HabitItem = ({
     changeCurrentHabit(habit, true);
     changeView("Stopwatch");
     changeViewBlock({
-      transform: "translateX(-120%)",
+      transform: "translateY(-120%)",
       transition: "all 0.8s",
     });
   };
@@ -25,7 +25,7 @@ const HabitItem = ({
   const openCalender = () => {
     changeView(habit);
     changeViewBlock({
-      transform: "translateX(-120%)",
+      transform: "translateY(-120%)",
       transition: "all 0.8s",
     });
   };

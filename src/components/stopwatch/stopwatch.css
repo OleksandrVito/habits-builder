@@ -143,12 +143,42 @@
   color: #666;
 }
 
-@media screen and (max-width: 767px) {
-  stop-watch-section {
+@media screen and (max-width: 1024px) {
+  .stop-watch-section {
     width: 100%;
+    position: absolute;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .stop-watch-section {
+    width: 100%;
+    /* position: absolute; */
   }
   .timer,
   .timer .backgroundContainer {
-    width: 90%;
+    width: 85%;
+    padding-top: 25px;
+    height: 105px;
+  }
+  .timer .container .block {
+    height: 55px;
+    padding: 10px;
+    padding-top: 0px;
+  }
+  .timer .container h2 {
+    font-size: 3.6em;
+    /* height: 90px; */
+    margin: 0;
+    color: white;
+    color: red;
+  }
+  .stop-watch-section h1 {
+    width: 80%;
+    padding-right: 5px;
+  }
+  .stop-watch-section .button_block {
+    width: 85%;
   }
 }

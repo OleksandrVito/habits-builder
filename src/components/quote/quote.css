@@ -38,8 +38,11 @@ cite {
 @media screen and (max-width: 767px) {
   .quote-box {
     width: 90%;
+    padding: 2px;
+    padding-bottom: 8px;
   }
   blockquote {
     font-size: 1.5em;
+    margin: 20px;
   }
 }

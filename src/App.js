@@ -76,7 +76,7 @@ function App() {
         className="back_btn"
         onClick={() => {
           changeViewBlock({
-            transform: "translateX(0)",
+            transform: "translateY(0)",
             transition: "all 0.8s",
           });
         }}
